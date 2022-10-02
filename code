@@ -1,0 +1,18 @@
+import turtle
+
+def curvaGosper(numero: int, tamaño: int, is_A: bool = True) -> None:
+    if numero == 0:
+        turtle.forward(tamaño)
+        return
+    for op in "A-B--B+A++AA+B-" if is_A else "+A-BB--B-A++A+B":
+        gosper_op_map[op](numero - 1, tamaño)
+
+gosper_op_map = {
+    "A": lambda o, tamaño: curvaGosper(o, tamaño, True),
+    "B": lambda o, tamaño: curvaGosper(o, tamaño, False),
+    "-": lambda o, tamaño: turtle.right(60),
+    "+": lambda o, tamaño: turtle.left(60),
+}
+tamaño = 40
+numero = 1
+curvaGosper(numero, tamaño)
